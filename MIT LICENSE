@@ -1,0 +1,13 @@
+License
+MIT License
+
+---
+ `docs/` Folder – Extended Documentation
+
+Include:
+
+- **Block diagram** of system architecture
+- **Flowchart** of data pipeline
+- **Model comparison table**
+- **Cloud integration steps** (e.g., Firebase, Azure)
+- **Cost breakdown** (if hardware is involved)
