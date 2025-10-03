@@ -1,0 +1,75 @@
+#PANDAS 
+#DATASET
+import pandas as pd
+
+data=pd.read_csv(r"C:\Users\sakthi\Documents\python task\Project Dataset\Healthcare-Diabetes.csv")
+
+data
+data.head(10)
+data.tail(20)
+data.describe()
+data.info()
+empty_cells = data.isnull()
+print(empty_cells)
+empty_cells =empty_cells[empty_cells == True]
+print(empty_cells)
+empty_cells = data.isnull().sum()
+print(empty_cells)
+empty_cells =empty_cells[empty_cells == True]
+print(empty_cells)
+missingvalue = data.isnull().sum()
+missingvalue
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+correlation_matrix = data.corr()
+
+# Plot heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Correlation Heatmap')
+plt.show()
+X= data.drop(["Id","Outcome"],axis=1)
+print(X)
+y=data["Outcome"]
+y
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train.head()
+y_train.head()
+X_test
+y_test
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+y_pred
+y_test
+# 🏥 Random Forest for Healthcare Prediction
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, accuracy_score
+
+# 📥 Load dataset (example: UCI Heart Disease)
+df = pd.read_csv(r"C:\Users\sakthi\Documents\python task\Project Dataset\Healthcare-Diabetes.csv")  # Replace with your dataset path
+
+X = df.drop('Outcome', axis=1)  # 'target' is the label column
+y = df['Outcome']
+
+# 🔀 Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 🌲 Train Random Forest
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+# 📊 Predict and evaluate
+y_pred = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+
+# 🌟 Feature Importance
+importances = pd.Series(model.feature_importances_, index=X.columns)
+print("\nFeature Importances:\n", importances.sort_values(ascending=False))
